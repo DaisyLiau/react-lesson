@@ -1,29 +1,37 @@
+axios.default.withCredentials = true;
+
 var TodoList = React.createClass({
 
   getInitialState: function () {
     return {
-      list: [
-        { id: 1, text: 'buy pen', done: false },
-        { id: 2, text: 'buy apple pen', done: false },
-        { id: 3, text: 'buy apple', done: true },
-      ],
+      list: [],
     };
   },
+  componentDidMount: function () {
+    axios.get(this.props.url).then(this.setList);
+  },
+  setList: function (response) {
+    this.setState({
+      list: response.data,
+    });
+  },
   addItem: function (newTodo) {
-    var newItem = {
+    /* var newItem = {
       text: newTodo,
       done: false,
       id: this.state.list.length + 1,
-    };
+    }; */
     // this.state.list.push(newTodo);
     // this.forceUpdate();
+    axios.post(this.props.url, { text: newTodo }).then(this.setList);
 
-    this.setState({
+    /* this.setState({
       list: this.state.list.concat(newItem),
-    });
+    }); */
   },
   toggleItem: function (id) {
-    var list = this.state.list.map(function (item) {
+    axios.put(this.props.url + id).then(this.setList);
+    /*var list = this.state.list.map(function (item) {
       return (item.id !== id) ? item : {
         id: item.id,
         text: item.text,
@@ -32,7 +40,7 @@ var TodoList = React.createClass({
     });
     this.setState({
       list: list,
-    });
+    }); */
 
     /* var list = this.state.list;
     for (var i = 0; i < list.length; i++) {
