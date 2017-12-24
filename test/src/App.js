@@ -1,38 +1,32 @@
 import React, { Component } from 'react';
+import axios from 'module';
+
+const API = 'https://ranking-scars377.c9users.io/';
 
 class App extends Component {
   state = {
-    value: '',
-    strength: '',
+    items: [],
   }
-  myChange =(e) => {
-    const value = e.target.value;
-    this.setState({
-      value,
-      strength: this.calcStrength(value),
-    });
+  componentDidMount() {
+    axios.get(API)
+      .then((rs) => {
+        this.setState({
+          items: rs.data,
+        });
+      });
   }
-  calcStrength = (value) => {
-    let score = value.length;
-    if (/[A-Z]/.test(value)) score *= 1.25;
-    if (/[a-z]/.test(value)) score *= 1.25;
-    if (/[0-9]/.test(value)) score *= 1.25;
-    if (/[^A-Za-z0-9]/.test(value)) score *= 1.25;
 
-    if (score > 40) return 'Perfect';
-    else if (score > 20) return 'Great';
-    else if (score > 10) return 'Good';
-    return 'nono';
-  }
   render() {
     return (
       <div>
-        <input
-          type="text"
-          value={this.state.value}
-          onChange={this.myChange}
-        />
-        <span>{this.state.strength}</span>
+        <input type="text"/>
+        {this.state.items.map(item => (
+          <div>
+            <img src={item.picyure} width="60"/>
+            <span>{item.openID}</span>
+            <span>{item.score}</span>
+          </div>
+        ))}
       </div>
     );
   }
