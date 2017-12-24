@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Talk from './components/Talk';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render(<Talk />, document.getElementById('root'));
