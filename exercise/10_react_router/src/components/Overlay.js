@@ -1,5 +1,5 @@
 import React from 'react';
-// code here
+import { Link } from 'react-router-dom';
 import './Overlay.css';
 
 const Overlay = ({ match }) => (
@@ -13,7 +13,7 @@ const Overlay = ({ match }) => (
         width="720"
         height="480"
       />
-      {/* code here */}
+      <Link className="closer" to="/vid" >55</Link>
     </div>
   </div>
 );

@@ -1,5 +1,8 @@
 import React from 'react';
-// code here...
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom';
 
 import Banner from './Banner';
 import Menu from './Menu';
@@ -9,7 +12,15 @@ import Footer from './Footer';
 import Overlay from './Overlay';
 
 const App = () => (
-  // code here...
+  <Router>
+    <div>
+      <Banner />
+      <Menu />
+      <Route path="/vid" component={Videos} />
+      <Route path="/about" component={About} />
+      <Route path="/vid/:name" component={Overlay} />
+    </div>
+  </Router>
 );
 
 export default App;

@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 
 import reducer from './reducers';
 import { getAllProducts } from './actions';
-import App from './containers/App';
+import App from './components/App';
 
 const store = createStore(
   reducer,
